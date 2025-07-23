@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ferretería MABCE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        .producto {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 250px;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .producto img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .precio {
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+        .carrito {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .carrito h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+        .boton {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .boton:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ferretería El Constructor</h1>
+    <div class="contenedor">
+        <div class="producto">
+            <img src="https://img.freepik.com/vector-gratis/diseno-etiqueta-martillo-garra-aislado_1308-61820.jpg" alt="Martillo">
+            <h3>Martillo</h3>
+            <p class="precio">Q 45.00</p>
+            <button class="boton" onclick="agregarAlCarrito('Martillo', 45)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://c0.klipartz.com/pngpicture/327/990/sticker-png-ohorongo-cement-bag-paper-bag-accessories-gunny-sack-material-bag-cement-thumbnail.png" alt="Cemento">
+            <h3>Saco de Cemento</h3>
+            <p class="precio">Q 72.50</p>
+            <button class="boton" onclick="agregarAlCarrito('Saco de Cemento', 72.50)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://e7.pngegg.com/pngimages/303/897/png-clipart-shovel-pala-shovel-technic-grey.png" alt="Pala">
+            <h3>Pala de Construcción</h3>
+            <p class="precio">Q 89.00</p>
+            <button class="boton" onclick="agregarAlCarrito('Pala de Construcción', 89)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://img.freepik.com/foto-gratis/monton-clavos-mesa-blanca_23-2148180534.jpg?semt=ais_hybrid&w=740" alt="Clavos">
+            <h3>Caja de Clavos</h3>
+            <p class="precio">Q 15.75</p>
+            <button class="boton" onclick="agregarAlCarrito('Caja de Clavos', 15.75)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://png.pngtree.com/png-vector/20250516/ourmid/pngtree-cordless-electric-drill-with-led-indicator-and-textured-grip-png-image_16303116.png" alt="Taladro">
+            <h3>Taladro Eléctrico</h3>
+            <p class="precio">Q 495.00</p>
+            <button class="boton" onclick="agregarAlCarrito('Taladro Eléctrico', 495)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://e7.pngegg.com/pngimages/524/641/png-clipart-paintbrush-brush-image-file-formats-photography.png" alt="Brochas">
+            <h3>Juego de Brochas</h3>
+            <p class="precio">Q 38.00</p>
+            <button class="boton" onclick="agregarAlCarrito('Juego de Brochas', 38)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://w7.pngwing.com/pngs/499/624/png-transparent-free-level.png" alt="Nivel">
+            <h3>Nivel de Burbuja</h3>
+            <p class="precio">Q 62.00</p>
+            <button class="boton" onclick="agregarAlCarrito('Nivel de Burbuja', 62)">Agregar al carrito</button>
+        </div>
+        <div class="producto">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/051/815/743/small_2x/3d-detailed-hacksaw-modeling-for-construction-projects-png.png" alt="Sierra Manual">
+            <h3>Sierra Manual</h3>
+            <p class="precio">Q 77.50</p>
+            <button class="boton" onclick="agregarAlCarrito('Sierra Manual', 77.5)">Agregar al carrito</button>
+        </div>
+    </div>
+
+    <div class="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="lista-carrito"></ul>
+        <p><strong>Total:</strong> Q <span id="total">0.00</span></p>
+    </div>
+
+    <script>
+        let total = 0;
+        const listaCarrito = document.getElementById("lista-carrito");
+        const totalElemento = document.getElementById("total");
+
+        function agregarAlCarrito(nombre, precio) {
+            const item = document.createElement("li");
+            item.textContent = ${nombre} - Q ${precio.toFixed(2)};
+            listaCarrito.appendChild(item);
+            total += precio;
+            totalElemento.textContent = total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
